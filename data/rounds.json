@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "title": "Guess The Chatter",
+    "hinweis": "Jede Runde braucht mind. 2 Bilder (letztes Bild = Aufdeckung) und mind. 2 Auswahlmöglichkeiten. Punkte werden automatisch berechnet: (AnzahlRateBilder - 1) - aktuelleStufe. AnzahlRateBilder = images.length - 1 (das letzte Bild zählt als Aufdeckung, nicht als Ratestufe)."
+  },
+  "rounds": [
+    {
+      "roundName": "Runde 1",
+      "images": [
+        "images/round1/1.svg",
+        "images/round1/2.svg",
+        "images/round1/3.svg",
+        "images/round1/4.svg",
+        "images/round1/5.svg",
+        "images/round1/6.svg"
+      ],
+      "choices": [
+        {
+          "name": "PixelPenguin",
+          "correct": false,
+          "extra": { "Folgt seit": "12.03.2022", "Abonnent": "Nein" }
+        },
+        {
+          "name": "ChatKoenig",
+          "correct": true,
+          "extra": { "Folgt seit": "01.11.2019", "Abonnent": "Ja (Tier 2)", "Sub seit": "8 Monate" }
+        },
+        {
+          "name": "NudelSuppe",
+          "correct": false,
+          "extra": { "Folgt seit": "22.07.2023", "Abonnent": "Nein" }
+        },
+        {
+          "name": "LurkMaster99",
+          "correct": false,
+          "extra": { "Folgt seit": "05.01.2024", "Abonnent": "Nein" }
+        },
+        {
+          "name": "Salatgurke",
+          "correct": false,
+          "extra": { "Folgt seit": "14.09.2021", "Abonnent": "Ja (Tier 1)" }
+        }
+      ]
+    },
+    {
+      "roundName": "Runde 2 (Beispiel mit 6 statt 5 Auswahlmoeglichkeiten)",
+      "images": [
+        "images/round2/1.svg",
+        "images/round2/2.svg",
+        "images/round2/3.svg",
+        "images/round2/4.svg",
+        "images/round2/5.svg",
+        "images/round2/6.svg"
+      ],
+      "choices": [
+        {
+          "name": "Waldschrat",
+          "correct": false,
+          "extra": { "Folgt seit": "03.02.2020", "Abonnent": "Nein" }
+        },
+        {
+          "name": "MonkaSpeed",
+          "correct": false,
+          "extra": { "Folgt seit": "19.06.2023", "Abonnent": "Ja (Tier 1)" }
+        },
+        {
+          "name": "Kartoffelpüree",
+          "correct": false,
+          "extra": { "Folgt seit": "27.08.2021", "Abonnent": "Nein" }
+        },
+        {
+          "name": "ClipGoblin",
+          "correct": true,
+          "extra": { "Folgt seit": "15.04.2018", "Abonnent": "Ja (Tier 3)", "Sub seit": "2 Jahre" }
+        },
+        {
+          "name": "Teebeutel",
+          "correct": false,
+          "extra": { "Folgt seit": "09.12.2022", "Abonnent": "Nein" }
+        },
+        {
+          "name": "RegenbogenEule",
+          "correct": false,
+          "extra": { "Folgt seit": "30.05.2024", "Abonnent": "Nein" }
+        }
+      ]
+    }
+  ]
+}

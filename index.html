@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Chatter</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=JetBrains+Mono:wght@400;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ============================================================ -->
+<!-- BILDSCHIRM 1: RAGEBAIT-INTRO                                  -->
+<!-- Hier ist Platz für Unsinn, bevor das eigentliche Spiel startet -->
+<!-- ============================================================ -->
+<section id="screen-ragebait" class="screen">
+    <div class="ragebait-box">
+        <p class="eyebrow">Guess The Chatter · System</p>
+        <h1 id="ragebait-status">Analysiere Chatqualität …</h1>
+        <div class="fake-progress">
+            <div id="fake-progress-bar" class="fake-progress-bar"></div>
+        </div>
+
+        <div class="iq-slider-wrap">
+            <p class="iq-label">Chat-IQ-Regler (rein kosmetisch, macht nichts)</p>
+            <input type="range" id="iq-slider" min="0" max="4" step="1" value="0" class="iq-slider">
+            <div class="iq-stops">
+                <span>Dumm</span>
+                <span>Brot</span>
+                <span>Fisch</span>
+                <span>Patrick Star</span>
+                <span>Schlau</span>
+            </div>
+            <p id="iq-reaction" class="iq-reaction">Hmm, mutig.</p>
+        </div>
+
+        <!-- IDEEN-BEREICH: hier kann bei Bedarf noch mehr Rage-Bait-Unsinn rein -->
+
+        <div class="evade-zone" id="evade-zone">
+            <button id="start-btn" class="btn btn-primary evade-btn">Spiel starten</button>
+        </div>
+        <button id="skip-ragebait" class="skip-link">kein Bock, direkt weiter →</button>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BILDSCHIRM 2: MENÜ                                            -->
+<!-- ============================================================ -->
+<section id="screen-menu" class="screen" hidden>
+    <div class="menu-box">
+        <p class="eyebrow">Bereit?</p>
+        <h1>Guess The Chatter</h1>
+        <p class="menu-text">
+            <span id="round-count">–</span> Runden geladen. Jede Runde zeigt nach und nach mehr
+            Chat-Nachrichten eines geblurrten Users – je früher richtig geraten wird, desto mehr Punkte.
+        </p>
+        <button id="begin-btn" class="btn btn-primary">Runde 1 starten</button>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BILDSCHIRM 3: SPIEL                                           -->
+<!-- ============================================================ -->
+<section id="screen-game" class="screen" hidden>
+    <header class="game-header">
+        <div class="game-header-left">
+            <span class="round-tag" id="round-label">Runde 1</span>
+        </div>
+        <div class="stage-dots" id="stage-dots"></div>
+        <div class="score-tag">Punkte: <span id="score-value">0</span></div>
+    </header>
+
+    <div class="chat-window">
+        <div class="chat-window-chrome">
+            <span class="chrome-dot chrome-dot-a"></span>
+            <span class="chrome-dot chrome-dot-b"></span>
+            <span class="chrome-dot chrome-dot-c"></span>
+            <span class="chrome-live"><span class="chrome-live-dot"></span>LIVE</span>
+        </div>
+        <div class="chat-window-body">
+            <img id="stage-image" class="stage-image" src="" alt="Chat-Nachrichten des gesuchten Chatters">
+        </div>
+    </div>
+
+    <p id="feedback" class="feedback" aria-live="polite"></p>
+
+    <div id="reveal-card" class="reveal-card" hidden>
+        <h2 id="reveal-name" class="reveal-name"></h2>
+        <dl id="reveal-extra" class="reveal-extra"></dl>
+    </div>
+
+    <div id="choices" class="choices"></div>
+
+    <div class="game-controls">
+        <button id="next-stage-btn" class="btn btn-ghost">Nächste Nachricht →</button>
+        <button id="next-round-btn" class="btn btn-primary" hidden>Nächste Runde →</button>
+    </div>
+</section>
+
+<!-- ============================================================ -->
+<!-- BILDSCHIRM 4: ENDE / ZUSAMMENFASSUNG                          -->
+<!-- ============================================================ -->
+<section id="screen-end" class="screen" hidden>
+    <div class="menu-box">
+        <p class="eyebrow">Geschafft</p>
+        <h1>Gesamt: <span id="final-score">0</span> Punkte</h1>
+        <ul id="final-breakdown" class="final-breakdown"></ul>
+        <button id="restart-btn" class="btn btn-primary">Nochmal von vorne</button>
+    </div>
+</section>
+
+<script src="js/script.js"></script>
+</body>
+</html>
