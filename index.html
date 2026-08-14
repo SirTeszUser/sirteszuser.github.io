@@ -10,24 +10,16 @@
 </head>
 <body>
 
-<!-- ============================================================ -->
-<!-- BILDSCHIRM 1: RAGEBAIT-INTRO                                  -->
-<!-- Hier ist Platz für Unsinn, bevor das eigentliche Spiel startet -->
-<!-- ============================================================ -->
 <section id="screen-ragebait" class="screen">
     <div class="ragebait-box">
         <p class="eyebrow" id="trick-counter">Trick 1 / 4</p>
-        <div id="ragebait-stage"><!-- wird von initTrick() befüllt --></div>
+        <div id="ragebait-stage"><!-- initTrick() --></div>
     </div>
 </section>
 
-<!-- Unsichtbarer Testskip, immer an derselben Stelle unten rechts.
-     Für den Streamer selbst nicht gedacht, nur fürs Entwickeln. -->
 <button id="dev-skip" class="dev-skip" aria-hidden="true" tabindex="-1" title="Dev-Skip"></button>
+<button id="skip-trick" class="dev-skip" aria-hidden="true" tabindex="-1" title="Trick-Skip"></button>
 
-<!-- ============================================================ -->
-<!-- BILDSCHIRM 2: MENÜ                                            -->
-<!-- ============================================================ -->
 <section id="screen-menu" class="screen" hidden>
     <div class="menu-box">
         <p class="eyebrow">Bereit?</p>
@@ -40,9 +32,6 @@
     </div>
 </section>
 
-<!-- ============================================================ -->
-<!-- BILDSCHIRM 3: SPIEL                                           -->
-<!-- ============================================================ -->
 <section id="screen-game" class="screen" hidden>
     <header class="game-header">
         <div class="game-header-left">
@@ -79,9 +68,6 @@
     </div>
 </section>
 
-<!-- ============================================================ -->
-<!-- BILDSCHIRM 4: ENDE / ZUSAMMENFASSUNG                          -->
-<!-- ============================================================ -->
 <section id="screen-end" class="screen" hidden>
     <div class="menu-box">
         <p class="eyebrow">Geschafft</p>

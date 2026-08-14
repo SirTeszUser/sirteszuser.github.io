@@ -1,29 +1,16 @@
 "use strict";
 
-/* ================================================================
-   GUESS THE CHATTER
-   Kompletter Spielablauf: Ragebait-Intro -> Menü -> Runden -> Ende.
-   Alle Inhalte (Bilder, Chatter, Zusatzinfos) kommen aus
-   data/rounds.json – dort erweiterst du das Spiel, ohne dieses
-   Skript anfassen zu müssen. Siehe README.md.
-   ================================================================ */
-
-// ---------------------------------------------------------------
-// Globaler Spielzustand
-// ---------------------------------------------------------------
 const state = {
     rounds: [],
     roundIndex: 0,
-    stageIndex: 0, // 0-basiert, zeigt auf rounds[i].images[stageIndex]
+    stageIndex: 0,
     score: 0,
     solved: false,
-    wrongNames: new Set(), // Namen, die in der aktuellen Runde schon falsch geraten wurden
-    results: [], // { roundName, points, guessed }
+    wrongNames: new Set(),
+    results: [],
 };
 
-// ---------------------------------------------------------------
-// Elemente cachen
-// ---------------------------------------------------------------
+// cache
 const el = {
     screens: {
         ragebait: document.getElementById("screen-ragebait"),
@@ -55,26 +42,20 @@ function showScreen(name) {
     });
 }
 
-// ================================================================
-// RAGEBAIT-INTRO
-// Eine Abfolge kleiner "Tricks" im Stil von Level Devil / Trees
-// Hate You: jeder Trick bricht eine andere Erwartung (Countdown
-// lügt, Balken springt zurück, Regler ist gespiegelt, Button
-// flüchtet). Neue Tricks fügst du einfach als weitere Funktion
-// zum TRICKS-Array unten hinzu – Reihenfolge = Array-Reihenfolge.
-//
-// Kein Trick ist hart blockierend: jeder gibt nach ein paar
-// Versuchen automatisch nach, damit das Spiel am Ende immer
-// startbar bleibt.
-// ================================================================
 const TRICKS = [trickCountdown, trickProgress, trickMirroredSlider, trickEvadingButton];
+
+let currentTrickIndex = 0;
 
 function initRagebait() {
     runTrick(0);
     document.getElementById("dev-skip").addEventListener("click", enterMenu);
+    document.getElementById("skip-trick").addEventListener("click", () => {
+        runTrick(currentTrickIndex + 1);
+    });
 }
 
 function runTrick(index) {
+    currentTrickIndex = index;
     if (index >= TRICKS.length) {
         enterMenu();
         return;
@@ -85,7 +66,6 @@ function runTrick(index) {
     TRICKS[index](stage, () => runTrick(index + 1));
 }
 
-// ---- Trick 1: Countdown, der sich selbst zurücksetzt ----
 function trickCountdown(container, next) {
     container.innerHTML = `
     <h1>Spiel startet in …</h1>
@@ -119,7 +99,6 @@ function trickCountdown(container, next) {
     setTimeout(tick, 700);
 }
 
-// ---- Trick 2: Ladebalken, der kurz vor Ende zurückspringt ----
 function trickProgress(container, next) {
     container.innerHTML = `
     <h1 id="ragebait-status">Analysiere Chatqualität …</h1>
@@ -129,9 +108,10 @@ function trickProgress(container, next) {
     const status = document.getElementById("ragebait-status");
     const messages = [
         "Analysiere Chatqualität …",
-        "Zähle Kappa-Emotes …",
-        "Suche nach Sinn im Chat …",
-        "Bestätige, dass Chat kein Sinn ergibt …",
+        "Zähle Emotes …",
+        "Suche nach Sinn im Content …",
+        "Bestätige, dass Content nicht BIG ist …",
+        "Suche first Messages …"
     ];
 
     let progress = 0;
@@ -143,7 +123,7 @@ function trickProgress(container, next) {
             progress = Math.min(progress, 92);
         } else {
             stall++;
-            if (stall <= 2) {
+            if (stall <= 20) {
                 progress -= 18;
                 status.textContent = messages[Math.min(stall, messages.length - 1)];
             } else {
@@ -157,14 +137,13 @@ function trickProgress(container, next) {
     }, 550);
 }
 
-// ---- Trick 3: gespiegelter Regler – zieht man rechts, geht er links ----
 function trickMirroredSlider(container, next) {
     container.innerHTML = `
-    <h1>Chat-IQ-Regler</h1>
-    <p class="trick-sub">Zieh den Regler ganz nach rechts (Patrick Star).</p>
+    <h1>IQ-Regler</h1>
+    <p class="trick-sub">Wie schlau ist Leeeonn?</p>
     <div class="iq-slider-wrap">
       <input type="range" id="iq-slider" min="0" max="4" step="1" value="0" class="iq-slider">
-      <div class="iq-stops"><span>Dumm</span><span>Brot</span><span>Fisch</span><span>Patrick Star</span><span>Schlau</span></div>
+      <div class="iq-stops"><span>Dumm</span><span>Patrick</span><span>Fisch</span><span>Brot</span><span>Schlau</span></div>
       <p id="iq-reaction" class="iq-reaction">Viel Erfolg, die Richtung stimmt nicht ganz …</p>
     </div>
   `;
@@ -185,68 +164,72 @@ function trickMirroredSlider(container, next) {
     });
 }
 
-// ---- Trick 4: Button, der vorm Mauszeiger flieht ----
 function trickEvadingButton(container, next) {
     container.innerHTML = `
     <h1>Fast geschafft</h1>
-    <p class="trick-sub">Klick auf „Spiel starten“.</p>
-    <div class="evade-zone" id="evade-zone">
-      <button id="start-btn" class="btn btn-primary evade-btn">Spiel starten</button>
-    </div>
+    <p class="trick-sub">Klick auf „Spiel starten“ um das spiel zu starten <img src="../assets/aga.png" alt="aga" height="32" width="32"></p>
   `;
-    const zone = document.getElementById("evade-zone");
-    const btn = document.getElementById("start-btn");
 
-    let evasions = 0;
-    const maxEvasions = 5;
+    const btn = document.createElement("button");
+    btn.id = "start-btn";
+    btn.className = "btn btn-primary evade-btn-floating";
+    btn.textContent = "Spiel starten";
+    document.body.appendChild(btn);
+    document.body.classList.add("evading");
+    placeButtonRandom(btn);
+
+    const dangerRadius = 50;
 
     function onMove(event) {
-        if (evasions >= maxEvasions) return;
-
-        const zoneRect = zone.getBoundingClientRect();
-        const btnRect = btn.getBoundingClientRect();
-        const btnCenterX = btnRect.left + btnRect.width / 2;
-        const btnCenterY = btnRect.top + btnRect.height / 2;
-        const dist = Math.hypot(event.clientX - btnCenterX, event.clientY - btnCenterY);
-        const dangerRadius = 70;
-
+        const rect = btn.getBoundingClientRect();
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+        const dist = Math.hypot(event.clientX - cx, event.clientY - cy);
         if (dist < dangerRadius) {
-            evasions++;
-            const maxX = Math.max(zoneRect.width - btnRect.width, 0);
-            const maxY = Math.max(zoneRect.height - btnRect.height, 0);
-            const newX = Math.random() * maxX;
-            const newY = Math.random() * maxY;
-
-            btn.classList.add("fleeing");
-            btn.style.left = `${newX}px`;
-            btn.style.top = `${newY}px`;
-
-            if (evasions >= maxEvasions) {
-                btn.classList.remove("fleeing");
-                btn.classList.add("ready");
-                btn.style.left = "";
-                btn.style.top = "";
-                btn.textContent = "Ok, genug gerannt 😅 Los geht's";
-                zone.removeEventListener("mousemove", onMove);
-            }
+            placeButtonRandom(btn, event.clientX, event.clientY);
         }
     }
 
-    zone.addEventListener("mousemove", onMove);
-    btn.addEventListener("click", next);
+    function finish() {
+        document.removeEventListener("mousemove", onMove);
+        document.body.classList.remove("evading");
+        btn.remove();
+        next();
+    }
+
+    document.addEventListener("mousemove", onMove);
+    btn.addEventListener("click", finish);
 }
 
-// ================================================================
-// MENÜ
-// ================================================================
+function placeButtonRandom(btn, awayFromX, awayFromY) {
+    const margin = 24;
+    const w = btn.offsetWidth || 170;
+    const h = btn.offsetHeight || 50;
+    const maxX = Math.max(window.innerWidth - w - margin * 2, 0);
+    const maxY = Math.max(window.innerHeight - h - margin * 2, 0);
+
+    let x = margin;
+    let y = margin;
+    let tries = 0;
+    do {
+        x = margin + Math.random() * maxX;
+        y = margin + Math.random() * maxY;
+        tries++;
+    } while (
+        awayFromX != null &&
+        Math.hypot(x + w / 2 - awayFromX, y + h / 2 - awayFromY) < 180 &&
+        tries < 12
+        );
+
+    btn.style.left = `${x}px`;
+    btn.style.top = `${y}px`;
+}
+
 function enterMenu() {
     showScreen("menu");
     el.roundCount.textContent = state.rounds.length;
 }
 
-// ================================================================
-// SPIEL-ABLAUF
-// ================================================================
 function startGame() {
     state.roundIndex = 0;
     state.score = 0;
@@ -272,8 +255,6 @@ function currentRound() {
     return state.rounds[state.roundIndex];
 }
 
-// Anzahl der Ratestufen: alle Bilder außer dem letzten
-// (das letzte Bild ist immer die volle Aufdeckung).
 function guessStageCount(round) {
     return round.images.length - 1;
 }
@@ -360,8 +341,10 @@ function handleChoiceClick(choice, btnEl) {
         btnEl.classList.add("wrong");
         btnEl.disabled = true;
         state.wrongNames.add(choice.name);
-        el.feedback.textContent = "Nicht ganz – nächster Versuch?";
+        el.feedback.textContent = "Falsch – nächster Versuch";
         el.feedback.className = "feedback bad";
+
+        setTimeout(goToNextStage, 100);
     }
 }
 
@@ -434,11 +417,6 @@ function showEndScreen() {
     });
 }
 
-// ================================================================
-// TASTATURSTEUERUNG (praktisch für Streamer:innen ohne Maus-Fokus)
-// Pfeil rechts / Leertaste = nächste Nachricht
-// Zahlentasten 1-9         = entsprechende Auswahl anklicken
-// ================================================================
 document.addEventListener("keydown", (event) => {
     if (el.screens.game.hidden) return;
 
@@ -455,9 +433,6 @@ document.addEventListener("keydown", (event) => {
     }
 });
 
-// ================================================================
-// DATEN LADEN & INITIALISIERUNG
-// ================================================================
 async function loadRounds() {
     const response = await fetch("data/rounds.json");
     if (!response.ok) throw new Error(`rounds.json konnte nicht geladen werden (${response.status})`);

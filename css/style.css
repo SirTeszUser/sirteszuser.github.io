@@ -1,8 +1,3 @@
-/* ============================================================
-   DESIGN-TOKENS
-   Alles über CSS-Variablen steuerbar – hier änderst du Farben,
-   Schriften und Abstände zentral für die ganze Seite.
-   ============================================================ */
 :root {
     --bg: #0b0b12;
     --panel: #15151f;
@@ -19,7 +14,7 @@
     --text: #f2f0ff;
     --text-muted: #8b87a8;
 
-    --font-display: "Space Grotesk", sans-serif;
+    --font-display: "Space Grotesk";
     --font-body: "Inter";
     --font-mono: "JetBrains Mono";
 
@@ -67,6 +62,9 @@ h1, h2 {
     justify-content: center;
     padding: 32px 20px;
 }
+.screen[hidden] {
+    display: none !important;
+}
 
 .btn {
     font-family: var(--font-display), sans-serif;
@@ -107,9 +105,6 @@ h1, h2 {
     transform: none;
 }
 
-/* ============================================================
-   RAGEBAIT-SCREEN
-   ============================================================ */
 .ragebait-box {
     max-width: 520px;
     width: 100%;
@@ -131,12 +126,11 @@ h1, h2 {
 
 .fake-progress-bar {
     height: 100%;
-    width: 0%;
+    width: 0;
     background: linear-gradient(90deg, var(--accent), var(--good));
     transition: width 0.4s ease;
 }
 
-/* ---- Trick 1: Countdown, der sich selbst betrügt ---- */
 .trick-countdown-number {
     font-family: var(--font-display), sans-serif;
     font-size: 64px;
@@ -153,7 +147,6 @@ h1, h2 {
     min-height: 18px;
 }
 
-/* ---- Trick 2: Ladebalken, der kurz vor Ende zurückspringt ---- */
 .fake-progress {
     height: 10px;
     border-radius: 999px;
@@ -165,12 +158,11 @@ h1, h2 {
 
 .fake-progress-bar {
     height: 100%;
-    width: 0%;
+    width: 0;
     background: linear-gradient(90deg, var(--accent), var(--good));
     transition: width 0.4s ease;
 }
 
-/* ---- Trick 3: gespiegelter Regler (Steuerung invertiert) ---- */
 .iq-slider-wrap {
     margin-bottom: 6px;
 }
@@ -186,7 +178,7 @@ h1, h2 {
 .iq-slider {
     width: 100%;
     accent-color: var(--accent);
-    transform: scaleX(-1); /* dreht die Zugrichtung um */
+    transform: scaleX(-1);
 }
 
 .iq-stops {
@@ -206,33 +198,18 @@ h1, h2 {
     text-align: center;
 }
 
-/* ---- Trick 4: fliehender Button ---- */
-.evade-zone {
-    position: relative;
-    height: 110px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+:root {
+    --evade-font-size: 16px;
+    --evade-slide-time: 0.35s;
 }
 
-.evade-btn {
-    position: relative;
+.evade-btn-floating {
+    position: fixed;
+    font-size: var(--evade-font-size);
+    transition: left var(--evade-slide-time) ease, top var(--evade-slide-time) ease;
+    z-index: 1000;
 }
 
-.evade-btn.fleeing {
-    position: absolute;
-}
-
-.evade-btn.ready {
-    animation: pulse-ready 1.1s ease-in-out infinite;
-}
-
-@keyframes pulse-ready {
-    0%, 100% { box-shadow: 0 0 0 0 var(--accent-soft); }
-    50% { box-shadow: 0 0 0 14px transparent; }
-}
-
-/* ---- Unsichtbarer Dev-Skip, immer unten rechts ---- */
 .dev-skip {
     position: fixed;
     right: 0;
@@ -245,10 +222,11 @@ h1, h2 {
     cursor: default;
     z-index: 999;
 }
+#skip-trick {
+    right: auto;
+    left: 0;
+}
 
-/* ============================================================
-   MENÜ- UND END-SCREEN
-   ============================================================ */
 .menu-box {
     max-width: 560px;
     width: 100%;
@@ -287,9 +265,6 @@ h1, h2 {
     font-weight: 600;
 }
 
-/* ============================================================
-   SPIEL-SCREEN
-   ============================================================ */
 #screen-game {
     flex-direction: column;
     align-items: stretch;
@@ -346,9 +321,6 @@ h1, h2 {
     border-color: var(--good);
 }
 
-/* Chat-Fenster: das Signature-Element der Seite.
-   Bildet eine Twitch-artige Chat-Box, in der das jeweils
-   aktuelle Bild wie eine "neue Nachricht" reingerutscht kommt. */
 .chat-window {
     background: var(--panel);
     border: 1px solid var(--border);
@@ -464,8 +436,6 @@ h1, h2 {
     font-size: 15px;
 }
 
-/* Auswahl-Grid: passt sich automatisch an, egal ob 5, 6 oder mehr
-   Chatter in der rounds.json stehen */
 .choices {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
