@@ -16,33 +16,14 @@
 <!-- ============================================================ -->
 <section id="screen-ragebait" class="screen">
     <div class="ragebait-box">
-        <p class="eyebrow">Guess The Chatter · System</p>
-        <h1 id="ragebait-status">Analysiere Chatqualität …</h1>
-        <div class="fake-progress">
-            <div id="fake-progress-bar" class="fake-progress-bar"></div>
-        </div>
-
-        <div class="iq-slider-wrap">
-            <p class="iq-label">Chat-IQ-Regler (rein kosmetisch, macht nichts)</p>
-            <input type="range" id="iq-slider" min="0" max="4" step="1" value="0" class="iq-slider">
-            <div class="iq-stops">
-                <span>Dumm</span>
-                <span>Brot</span>
-                <span>Fisch</span>
-                <span>Patrick Star</span>
-                <span>Schlau</span>
-            </div>
-            <p id="iq-reaction" class="iq-reaction">Hmm, mutig.</p>
-        </div>
-
-        <!-- IDEEN-BEREICH: hier kann bei Bedarf noch mehr Rage-Bait-Unsinn rein -->
-
-        <div class="evade-zone" id="evade-zone">
-            <button id="start-btn" class="btn btn-primary evade-btn">Spiel starten</button>
-        </div>
-        <button id="skip-ragebait" class="skip-link">kein Bock, direkt weiter →</button>
+        <p class="eyebrow" id="trick-counter">Trick 1 / 4</p>
+        <div id="ragebait-stage"><!-- wird von initTrick() befüllt --></div>
     </div>
 </section>
+
+<!-- Unsichtbarer Testskip, immer an derselben Stelle unten rechts.
+     Für den Streamer selbst nicht gedacht, nur fürs Entwickeln. -->
+<button id="dev-skip" class="dev-skip" aria-hidden="true" tabindex="-1" title="Dev-Skip"></button>
 
 <!-- ============================================================ -->
 <!-- BILDSCHIRM 2: MENÜ                                            -->

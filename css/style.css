@@ -20,8 +20,8 @@
     --text-muted: #8b87a8;
 
     --font-display: "Space Grotesk", sans-serif;
-    --font-body: "Inter", sans-serif;
-    --font-mono: "JetBrains Mono", monospace;
+    --font-body: "Inter";
+    --font-mono: "JetBrains Mono";
 
     --radius: 16px;
     --radius-sm: 10px;
@@ -36,7 +36,7 @@ html, body {
     padding: 0;
     background: var(--bg);
     color: var(--text);
-    font-family: var(--font-body);
+    font-family: var(--font-body), sans-serif;
     min-height: 100vh;
 }
 
@@ -47,12 +47,12 @@ body {
 }
 
 h1, h2 {
-    font-family: var(--font-display);
+    font-family: var(--font-display), sans-serif;
     margin: 0 0 12px;
 }
 
 .eyebrow {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
     font-size: 13px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
@@ -67,12 +67,9 @@ h1, h2 {
     justify-content: center;
     padding: 32px 20px;
 }
-.screen[hidden] {
-    display: none !important;
-}
 
 .btn {
-    font-family: var(--font-display);
+    font-family: var(--font-display), sans-serif;
     font-size: 16px;
     font-weight: 700;
     border: none;
@@ -134,25 +131,62 @@ h1, h2 {
 
 .fake-progress-bar {
     height: 100%;
-    width: 0;
+    width: 0%;
     background: linear-gradient(90deg, var(--accent), var(--good));
     transition: width 0.4s ease;
 }
 
+/* ---- Trick 1: Countdown, der sich selbst betrügt ---- */
+.trick-countdown-number {
+    font-family: var(--font-display), sans-serif;
+    font-size: 64px;
+    text-align: center;
+    margin: 10px 0;
+    color: var(--accent);
+}
+
+.trick-sub {
+    text-align: center;
+    color: var(--text-muted);
+    font-family: var(--font-mono), monospace;
+    font-size: 13px;
+    min-height: 18px;
+}
+
+/* ---- Trick 2: Ladebalken, der kurz vor Ende zurückspringt ---- */
+.fake-progress {
+    height: 10px;
+    border-radius: 999px;
+    background: var(--panel-alt);
+    overflow: hidden;
+    margin: 18px 0 10px;
+    border: 1px solid var(--border);
+}
+
+.fake-progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--good));
+    transition: width 0.4s ease;
+}
+
+/* ---- Trick 3: gespiegelter Regler (Steuerung invertiert) ---- */
 .iq-slider-wrap {
-    margin-bottom: 30px;
+    margin-bottom: 6px;
 }
 
 .iq-label {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
     font-size: 12px;
     color: var(--text-muted);
     margin: 0 0 10px;
+    text-align: center;
 }
 
 .iq-slider {
     width: 100%;
     accent-color: var(--accent);
+    transform: scaleX(-1); /* dreht die Zugrichtung um */
 }
 
 .iq-stops {
@@ -161,7 +195,7 @@ h1, h2 {
     font-size: 11px;
     color: var(--text-muted);
     margin-top: 6px;
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
 }
 
 .iq-reaction {
@@ -169,11 +203,13 @@ h1, h2 {
     font-size: 14px;
     color: var(--accent);
     min-height: 20px;
+    text-align: center;
 }
 
+/* ---- Trick 4: fliehender Button ---- */
 .evade-zone {
     position: relative;
-    height: 90px;
+    height: 110px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -196,22 +232,18 @@ h1, h2 {
     50% { box-shadow: 0 0 0 14px transparent; }
 }
 
-.skip-link {
-    display: block;
-    margin: 18px auto 0;
-    background: none;
+/* ---- Unsichtbarer Dev-Skip, immer unten rechts ---- */
+.dev-skip {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    width: 44px;
+    height: 44px;
     border: none;
-    color: var(--text-muted);
-    font-family: var(--font-mono);
-    font-size: 12px;
-    cursor: pointer;
-    opacity: 0.55;
-    text-decoration: underline;
-}
-
-.skip-link:hover {
-    opacity: 1;
-    color: var(--accent);
+    background: transparent;
+    opacity: 0;
+    cursor: default;
+    z-index: 999;
 }
 
 /* ============================================================
@@ -238,7 +270,7 @@ h1, h2 {
     padding: 0;
     margin: 0 0 26px;
     text-align: left;
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
     font-size: 14px;
     color: var(--text-muted);
 }
@@ -275,7 +307,7 @@ h1, h2 {
 }
 
 .round-tag, .score-tag {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
     font-size: 13px;
     color: var(--text-muted);
     background: var(--panel);
@@ -346,7 +378,7 @@ h1, h2 {
 
 .chrome-live {
     margin-left: auto;
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
     font-size: 11px;
     letter-spacing: 0.08em;
     color: var(--bad);
@@ -388,7 +420,7 @@ h1, h2 {
 .feedback {
     min-height: 22px;
     text-align: center;
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
     font-size: 14px;
     margin: 0;
 }
@@ -420,7 +452,7 @@ h1, h2 {
 }
 
 .reveal-extra dt {
-    font-family: var(--font-mono);
+    font-family: var(--font-mono), monospace;
     font-size: 11px;
     color: var(--text-muted);
     text-transform: uppercase;
@@ -441,7 +473,7 @@ h1, h2 {
 }
 
 .choice-btn {
-    font-family: var(--font-body);
+    font-family: var(--font-body), sans-serif;
     font-weight: 600;
     font-size: 15px;
     background: var(--panel);

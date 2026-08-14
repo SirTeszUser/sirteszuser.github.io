@@ -57,23 +57,74 @@ function showScreen(name) {
 
 // ================================================================
 // RAGEBAIT-INTRO
-// Kann bei Bedarf beliebig erweitert werden (siehe IDEEN-BEREICH
-// im HTML). Zwei Sachen laufen hier parallel:
-//  1) eine gefaketen Ladebalken, der kurz vor Ende hängen bleibt
-//  2) ein "Spiel starten"-Button, der vor dem Mauszeiger flüchtet
-// Beides ist NICHT hart blockierend: nach ein paar Versuchen /
-// Sekunden gibt das System nach, und es gibt immer einen kleinen
-// "direkt weiter"-Link für alle, die einfach nur spielen wollen.
+// Eine Abfolge kleiner "Tricks" im Stil von Level Devil / Trees
+// Hate You: jeder Trick bricht eine andere Erwartung (Countdown
+// lügt, Balken springt zurück, Regler ist gespiegelt, Button
+// flüchtet). Neue Tricks fügst du einfach als weitere Funktion
+// zum TRICKS-Array unten hinzu – Reihenfolge = Array-Reihenfolge.
+//
+// Kein Trick ist hart blockierend: jeder gibt nach ein paar
+// Versuchen automatisch nach, damit das Spiel am Ende immer
+// startbar bleibt.
 // ================================================================
-function initRagebait() {
-    initFakeProgress();
-    initIqSlider();
-    initEvadingButton();
+const TRICKS = [trickCountdown, trickProgress, trickMirroredSlider, trickEvadingButton];
 
-    document.getElementById("skip-ragebait").addEventListener("click", enterMenu);
+function initRagebait() {
+    runTrick(0);
+    document.getElementById("dev-skip").addEventListener("click", enterMenu);
 }
 
-function initFakeProgress() {
+function runTrick(index) {
+    if (index >= TRICKS.length) {
+        enterMenu();
+        return;
+    }
+    document.getElementById("trick-counter").textContent = `Trick ${index + 1} / ${TRICKS.length}`;
+    const stage = document.getElementById("ragebait-stage");
+    stage.innerHTML = "";
+    TRICKS[index](stage, () => runTrick(index + 1));
+}
+
+// ---- Trick 1: Countdown, der sich selbst zurücksetzt ----
+function trickCountdown(container, next) {
+    container.innerHTML = `
+    <h1>Spiel startet in …</h1>
+    <div class="trick-countdown-number" id="count-num">3</div>
+    <p class="trick-sub" id="count-sub"></p>
+  `;
+    const numEl = document.getElementById("count-num");
+    const subEl = document.getElementById("count-sub");
+    let cycle = 0;
+    let n = 3;
+
+    const tick = () => {
+        n--;
+        if (n > 0) {
+            numEl.textContent = n;
+            setTimeout(tick, 700);
+        } else {
+            cycle++;
+            if (cycle < 2) {
+                numEl.textContent = "3";
+                n = 3;
+                subEl.textContent = "Moment, nochmal von vorne.";
+                setTimeout(tick, 700);
+            } else {
+                numEl.textContent = "0";
+                subEl.textContent = "Diesmal wirklich.";
+                setTimeout(next, 600);
+            }
+        }
+    };
+    setTimeout(tick, 700);
+}
+
+// ---- Trick 2: Ladebalken, der kurz vor Ende zurückspringt ----
+function trickProgress(container, next) {
+    container.innerHTML = `
+    <h1 id="ragebait-status">Analysiere Chatqualität …</h1>
+    <div class="fake-progress"><div id="fake-progress-bar" class="fake-progress-bar"></div></div>
+  `;
     const bar = document.getElementById("fake-progress-bar");
     const status = document.getElementById("ragebait-status");
     const messages = [
@@ -85,14 +136,12 @@ function initFakeProgress() {
 
     let progress = 0;
     let stall = 0;
-    status.textContent = messages[0];
 
     const interval = setInterval(() => {
         if (progress < 92) {
             progress += Math.random() * 9;
             progress = Math.min(progress, 92);
         } else {
-            // kurz vor Ende "hängt" die Leiste ein paar Mal
             stall++;
             if (stall <= 2) {
                 progress -= 18;
@@ -101,29 +150,50 @@ function initFakeProgress() {
                 progress = 100;
                 status.textContent = "Fertig. Viel Erfolg.";
                 clearInterval(interval);
+                setTimeout(next, 500);
             }
         }
         bar.style.width = `${progress}%`;
     }, 550);
 }
 
-function initIqSlider() {
+// ---- Trick 3: gespiegelter Regler – zieht man rechts, geht er links ----
+function trickMirroredSlider(container, next) {
+    container.innerHTML = `
+    <h1>Chat-IQ-Regler</h1>
+    <p class="trick-sub">Zieh den Regler ganz nach rechts (Patrick Star).</p>
+    <div class="iq-slider-wrap">
+      <input type="range" id="iq-slider" min="0" max="4" step="1" value="0" class="iq-slider">
+      <div class="iq-stops"><span>Dumm</span><span>Brot</span><span>Fisch</span><span>Patrick Star</span><span>Schlau</span></div>
+      <p id="iq-reaction" class="iq-reaction">Viel Erfolg, die Richtung stimmt nicht ganz …</p>
+    </div>
+  `;
     const slider = document.getElementById("iq-slider");
     const reaction = document.getElementById("iq-reaction");
-    const reactions = [
-        "Ehrlich gesagt fair.",
-        "Immerhin ein Anfang.",
-        "Solide Mitte.",
-        "Respekt, großer Fisch-Energie.",
-        "Patrick-Star-Niveau erreicht. Läuft.",
-    ];
+    const reactions = ["Kalt.", "Wärmer.", "Fast.", "Fast fast.", "Geschafft!"];
+    let holdTimer = null;
 
     slider.addEventListener("input", () => {
-        reaction.textContent = reactions[Number(slider.value)];
+        const value = Number(slider.value);
+        reaction.textContent = reactions[value];
+        if (value === 4) {
+            holdTimer = setTimeout(next, 400);
+        } else if (holdTimer) {
+            clearTimeout(holdTimer);
+            holdTimer = null;
+        }
     });
 }
 
-function initEvadingButton() {
+// ---- Trick 4: Button, der vorm Mauszeiger flieht ----
+function trickEvadingButton(container, next) {
+    container.innerHTML = `
+    <h1>Fast geschafft</h1>
+    <p class="trick-sub">Klick auf „Spiel starten“.</p>
+    <div class="evade-zone" id="evade-zone">
+      <button id="start-btn" class="btn btn-primary evade-btn">Spiel starten</button>
+    </div>
+  `;
     const zone = document.getElementById("evade-zone");
     const btn = document.getElementById("start-btn");
 
@@ -163,7 +233,7 @@ function initEvadingButton() {
     }
 
     zone.addEventListener("mousemove", onMove);
-    btn.addEventListener("click", enterMenu);
+    btn.addEventListener("click", next);
 }
 
 // ================================================================
@@ -289,12 +359,9 @@ function handleChoiceClick(choice, btnEl) {
     } else {
         btnEl.classList.add("wrong");
         btnEl.disabled = true;
-
         state.wrongNames.add(choice.name);
-        el.feedback.textContent = "Falsch – nächster Versuch";
+        el.feedback.textContent = "Nicht ganz – nächster Versuch?";
         el.feedback.className = "feedback bad";
-
-        goToNextStage()
     }
 }
 
