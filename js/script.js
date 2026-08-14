@@ -60,7 +60,7 @@ function runTrick(index) {
         enterMenu();
         return;
     }
-    document.getElementById("trick-counter").textContent = `Trick ${index + 1} / ${TRICKS.length}`;
+    document.getElementById("trick-counter").textContent = `${index + 1} / ${TRICKS.length}`;
     const stage = document.getElementById("ragebait-stage");
     stage.innerHTML = "";
     TRICKS[index](stage, () => runTrick(index + 1));
@@ -167,7 +167,7 @@ function trickMirroredSlider(container, next) {
 function trickEvadingButton(container, next) {
     container.innerHTML = `
     <h1>Fast geschafft</h1>
-    <p class="trick-sub">Klick auf „Spiel starten“ um das spiel zu starten <img src="../assets/aga.png" alt="aga" height="32" width="32"></p>
+    <p class="trick-sub">Klick auf "Spiel starten" um das spiel zu starten <img src="../assets/aga.png" alt="aga" height="32" width="32"></p>
   `;
 
     const btn = document.createElement("button");
