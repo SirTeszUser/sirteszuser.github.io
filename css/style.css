@@ -67,6 +67,9 @@ h1, h2 {
     justify-content: center;
     padding: 32px 20px;
 }
+.screen[hidden] {
+    display: none !important;
+}
 
 .btn {
     font-family: var(--font-display);
@@ -131,7 +134,7 @@ h1, h2 {
 
 .fake-progress-bar {
     height: 100%;
-    width: 0%;
+    width: 0;
     background: linear-gradient(90deg, var(--accent), var(--good));
     transition: width 0.4s ease;
 }

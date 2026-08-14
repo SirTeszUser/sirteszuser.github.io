@@ -17,6 +17,7 @@ const state = {
     stageIndex: 0, // 0-basiert, zeigt auf rounds[i].images[stageIndex]
     score: 0,
     solved: false,
+    wrongNames: new Set(), // Namen, die in der aktuellen Runde schon falsch geraten wurden
     results: [], // { roundName, points, guessed }
 };
 
@@ -186,6 +187,7 @@ function startGame() {
 function startRound() {
     state.stageIndex = 0;
     state.solved = false;
+    state.wrongNames.clear();
     el.feedback.textContent = "";
     el.feedback.className = "feedback";
     el.revealCard.hidden = true;
@@ -252,7 +254,11 @@ function renderChoices(round) {
         const btn = document.createElement("button");
         btn.className = "choice-btn";
         btn.textContent = choice.name;
-        btn.disabled = state.solved || isReveal;
+
+        const alreadyWrong = state.wrongNames.has(choice.name);
+        if (alreadyWrong) btn.classList.add("wrong");
+        btn.disabled = state.solved || isReveal || alreadyWrong;
+
         btn.addEventListener("click", () => handleChoiceClick(choice, btn));
         el.choices.appendChild(btn);
     });
@@ -283,8 +289,12 @@ function handleChoiceClick(choice, btnEl) {
     } else {
         btnEl.classList.add("wrong");
         btnEl.disabled = true;
-        el.feedback.textContent = "Nicht ganz – nächster Versuch?";
+
+        state.wrongNames.add(choice.name);
+        el.feedback.textContent = "Falsch – nächster Versuch";
         el.feedback.className = "feedback bad";
+
+        goToNextStage()
     }
 }
 

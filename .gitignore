@@ -1,0 +1,9 @@
+# IntelliJ
+.idea/
+target/
+
+dependency-reduced-pom.xml
+
+*.iml
+*.env
+*.class

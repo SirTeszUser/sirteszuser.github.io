@@ -7,12 +7,12 @@
     {
       "roundName": "Runde 1",
       "images": [
-        "images/round1/1.svg",
-        "images/round1/2.svg",
-        "images/round1/3.svg",
-        "images/round1/4.svg",
-        "images/round1/5.svg",
-        "images/round1/6.svg"
+        "images/round1/1.png",
+        "images/round1/2.png",
+        "images/round1/3.png",
+        "images/round1/4.png",
+        "images/round1/5.png",
+        "images/round1/6.png"
       ],
       "choices": [
         {
@@ -45,12 +45,12 @@
     {
       "roundName": "Runde 2 (Beispiel mit 6 statt 5 Auswahlmoeglichkeiten)",
       "images": [
-        "images/round2/1.svg",
-        "images/round2/2.svg",
-        "images/round2/3.svg",
-        "images/round2/4.svg",
-        "images/round2/5.svg",
-        "images/round2/6.svg"
+        "images/round2/1.png",
+        "images/round2/2.png",
+        "images/round2/3.png",
+        "images/round2/4.png",
+        "images/round2/5.png",
+        "images/round2/6.png"
       ],
       "choices": [
         {
