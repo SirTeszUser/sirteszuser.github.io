@@ -110,7 +110,7 @@ function trickProgress(container, next) {
         "Analysiere Chatqualität …",
         "Zähle Emotes …",
         "Suche nach Sinn im Content …",
-        "Bestätige, dass Content nicht BIG ist …",
+        "Suche BIG CONTENT …",
         "Suche first Messages …"
     ];
 
@@ -149,7 +149,7 @@ function trickMirroredSlider(container, next) {
   `;
     const slider = document.getElementById("iq-slider");
     const reaction = document.getElementById("iq-reaction");
-    const reactions = ["Kalt.", "Wärmer.", "Fast.", "Fast fast.", "Geschafft!"];
+    const reactions = ["Kalt.", "Wärmer.", "Fast heiß.", "Mr_Tesz.", "Geschafft!"];
     let holdTimer = null;
 
     slider.addEventListener("input", () => {
@@ -167,18 +167,18 @@ function trickMirroredSlider(container, next) {
 function trickEvadingButton(container, next) {
     container.innerHTML = `
     <h1>Fast geschafft</h1>
-    <p class="trick-sub">Klick auf "Spiel starten" um das spiel zu starten <img src="../assets/aga.png" alt="aga" height="32" width="32"></p>
+    <p class="trick-sub">Klick auf <img src="../assets/aga.png" alt="aga" height="32" width="32"> um das spiel zu starten.</p>
   `;
 
     const btn = document.createElement("button");
     btn.id = "start-btn";
     btn.className = "btn btn-primary evade-btn-floating";
-    btn.textContent = "Spiel starten";
+    btn.innerHTML = `<img src="../assets/aga.png" alt="aga" height="64" width="64">`;
     document.body.appendChild(btn);
     document.body.classList.add("evading");
     placeButtonRandom(btn);
 
-    const dangerRadius = 50;
+    const dangerRadius = 55;
 
     function onMove(event) {
         const rect = btn.getBoundingClientRect();

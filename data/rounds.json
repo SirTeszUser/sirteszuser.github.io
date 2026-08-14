@@ -11,34 +11,28 @@
         "images/round1/2.png",
         "images/round1/3.png",
         "images/round1/4.png",
-        "images/round1/5.png",
-        "images/round1/6.png"
+        "images/round1/5.png"
       ],
       "choices": [
         {
           "name": "PixelPenguin",
-          "correct": false,
-          "extra": { "Folgt seit": "12.03.2022", "Abonnent": "Nein" }
+          "correct": false
         },
         {
           "name": "ChatKoenig",
-          "correct": true,
-          "extra": { "Folgt seit": "01.11.2019", "Abonnent": "Ja (Tier 2)", "Sub seit": "8 Monate" }
+          "correct": true
         },
         {
           "name": "NudelSuppe",
-          "correct": false,
-          "extra": { "Folgt seit": "22.07.2023", "Abonnent": "Nein" }
+          "correct": false
         },
         {
           "name": "LurkMaster99",
-          "correct": false,
-          "extra": { "Folgt seit": "05.01.2024", "Abonnent": "Nein" }
+          "correct": false
         },
         {
           "name": "Salatgurke",
-          "correct": false,
-          "extra": { "Folgt seit": "14.09.2021", "Abonnent": "Ja (Tier 1)" }
+          "correct": false
         }
       ]
     },
