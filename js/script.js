@@ -281,7 +281,7 @@ function guessStageCount(round) {
 
 function pointsForStage(round, stageIdx) {
     const stages = guessStageCount(round);
-    return Math.max(stages - 1 - stageIdx, 0);
+    return Math.max((stages - 1 - stageIdx) + 1, 0);
 }
 
 function renderStage() {
