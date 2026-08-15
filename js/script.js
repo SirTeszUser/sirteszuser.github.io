@@ -109,10 +109,10 @@ function trickProgress(container, next) {
     const status = document.getElementById("ragebait-status");
     const messages = [
         "Analysiere Chatqualität …",
-        "Zähle Emotes …",
-        "Suche nach Sinn im Content …",
-        "Suche BIG CONTENT …",
-        "Suche first Messages …"
+        "Leon abfucken …",
+        "Ragebaiten …",
+        "BIG CONTENT nicht anschauen …",
+        "Ragebaiten …"
     ];
 
     let progress = 0;
@@ -179,7 +179,7 @@ function trickEvadingButton(container, next) {
     document.body.classList.add("evading");
     placeButtonRandom(btn);
 
-    const dangerRadius = 55;
+    const dangerRadius = 59;
 
     function onMove(event) {
         const rect = btn.getBoundingClientRect();
