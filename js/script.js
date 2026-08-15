@@ -169,6 +169,7 @@ function trickEvadingButton(container, next) {
     container.innerHTML = `
     <h1>Fast geschafft</h1>
     <p class="trick-sub">Klick auf <img src="../assets/aga.png" alt="aga" height="32" width="32"> um das spiel zu starten.</p>
+    <img src="../assets/aga.png" alt="aga" height="128" width="440">
   `;
 
     const btn = document.createElement("button");
@@ -179,7 +180,7 @@ function trickEvadingButton(container, next) {
     document.body.classList.add("evading");
     placeButtonRandom(btn);
 
-    const dangerRadius = 59;
+    const dangerRadius = 70;
 
     function onMove(event) {
         const rect = btn.getBoundingClientRect();
