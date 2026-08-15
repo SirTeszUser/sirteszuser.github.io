@@ -2,6 +2,7 @@
 
 const state = {
     rounds: [],
+    chatterPool: [],
     roundIndex: 0,
     stageIndex: 0,
     score: 0,
@@ -237,10 +238,29 @@ function startGame() {
     startRound();
 }
 
+function shuffle(array) {
+    const copy = [...array];
+    for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+}
+
+function buildChoices(round) {
+    const wantedCount = round.choiceCount || 5;
+    const pool = state.chatterPool.filter((name) => name !== round.correct);
+
+    const decoys = shuffle(pool).slice(0, wantedCount - 1);
+
+    return shuffle([round.correct, ...decoys]);
+}
+
 function startRound() {
     state.stageIndex = 0;
     state.solved = false;
     state.wrongNames.clear();
+    currentRound()._choices = buildChoices(currentRound());
     el.feedback.textContent = "";
     el.feedback.className = "feedback";
     el.revealCard.hidden = true;
@@ -301,24 +321,24 @@ function renderChoices(round) {
     el.choices.innerHTML = "";
     const isReveal = state.stageIndex >= guessStageCount(round);
 
-    round.choices.forEach((choice) => {
+    round._choices.forEach((choice) => {
         const btn = document.createElement("button");
         btn.className = "choice-btn";
-        btn.textContent = choice.name;
+        btn.textContent = choice;
 
-        const alreadyWrong = state.wrongNames.has(choice.name);
+        const alreadyWrong = state.wrongNames.has(choice);
         if (alreadyWrong) btn.classList.add("wrong");
         btn.disabled = state.solved || isReveal || alreadyWrong;
 
-        btn.addEventListener("click", () => handleChoiceClick(choice, btn));
+        btn.addEventListener("click", () => handleChoiceClick(choice, round, btn));
         el.choices.appendChild(btn);
     });
 }
 
-function handleChoiceClick(choice, btnEl) {
+function handleChoiceClick(choice, round, btnEl) {
     if (state.solved) return;
 
-    if (choice.correct) {
+    if (choice === round.correct) {
         state.solved = true;
         const points = pointsForStage(currentRound(), state.stageIndex);
         state.score += points;
@@ -340,7 +360,7 @@ function handleChoiceClick(choice, btnEl) {
     } else {
         btnEl.classList.add("wrong");
         btnEl.disabled = true;
-        state.wrongNames.add(choice.name);
+        state.wrongNames.add(choice);
         el.feedback.textContent = "Falsch – nächster Versuch";
         el.feedback.className = "feedback bad";
 
@@ -362,23 +382,13 @@ function revealAnswer(round) {
         state.results.push({ roundName: round.roundName, points: 0, guessed: false });
     }
 
-    const correctChoice = round.choices.find((c) => c.correct);
+    const correctChoice = round.correct;
+    state.chatterPool = state.chatterPool.filter((c) => c !== correctChoice)
+
     el.revealCard.hidden = false;
-    el.revealName.textContent = correctChoice ? correctChoice.name : "?";
+    el.revealName.textContent = correctChoice;
 
     el.revealExtra.innerHTML = "";
-    if (correctChoice && correctChoice.extra) {
-        Object.entries(correctChoice.extra).forEach(([label, value]) => {
-            const wrap = document.createElement("div");
-            const dt = document.createElement("dt");
-            dt.textContent = label;
-            const dd = document.createElement("dd");
-            dd.textContent = value;
-            wrap.appendChild(dt);
-            wrap.appendChild(dd);
-            el.revealExtra.appendChild(wrap);
-        });
-    }
 }
 
 function goToNextStage() {
@@ -436,8 +446,7 @@ document.addEventListener("keydown", (event) => {
 async function loadRounds() {
     const response = await fetch("data/rounds.json");
     if (!response.ok) throw new Error(`rounds.json konnte nicht geladen werden (${response.status})`);
-    const data = await response.json();
-    return data.rounds || [];
+    return  await response.json();
 }
 
 async function init() {
@@ -449,7 +458,9 @@ async function init() {
     });
 
     try {
-        state.rounds = await loadRounds();
+        const data = await loadRounds();
+        state.rounds = data.rounds;
+        state.chatterPool = data.chatterPool;
     } catch (err) {
         console.error(err);
         document.body.innerHTML =

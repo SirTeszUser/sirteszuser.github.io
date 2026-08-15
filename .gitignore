@@ -1,6 +1,7 @@
 # IntelliJ
 .idea/
 target/
+allFinished/
 
 dependency-reduced-pom.xml
 

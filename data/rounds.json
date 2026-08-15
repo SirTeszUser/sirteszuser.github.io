@@ -1,83 +1,154 @@
 {
   "meta": {
     "title": "Guess The Chatter",
-    "hinweis": "Jede Runde braucht mind. 2 Bilder (letztes Bild = Aufdeckung) und mind. 2 Auswahlmöglichkeiten. Punkte werden automatisch berechnet: (AnzahlRateBilder - 1) - aktuelleStufe. AnzahlRateBilder = images.length - 1 (das letzte Bild zählt als Aufdeckung, nicht als Ratestufe)."
+    "hinweis": "Jede Runde zeigt nach und nach mehr Chat-Nachrichten eines Chatters - je früher der Chatter richtig erraten wird, desto mehr Punkte kriegst du."
   },
+  "chatterPool": [
+    "DasHeiligeKlo", "Harotte", "Kampftolette", "Lauenberger", "leeeonn_live", "Leli1315", "mighty_935", "mighty_mike84",
+    "real_nykrim", "Rexsoos_", "yullihahn", "reptoxicyt", "jonnyjonathanjonson", "twopacalive", "WehMicha", "Wubaaaa",   
+    "Pixelhorn", "zLucaaaaa", "Mr_Tesz", "xmarct6", "Blackstone2434_", "itzadirector", "raaafaeel_floose", "Mrlucky12344",
+    "CreinLP11", "Janskii_", "AronOhneC", "jojand24"
+  ],
   "rounds": [
     {
       "roundName": "Runde 1",
-      "images": [
-        "images/round1/1.png",
-        "images/round1/2.png",
-        "images/round1/3.png",
-        "images/round1/4.png",
-        "images/round1/5.png"
+      "images": [ 
+        "images/round1/i1.png", 
+        "images/round1/i2.png", 
+        "images/round1/i3.png",
+        "images/round1/i4.png", 
+        "images/round1/i5.png", 
+        "images/round1/i6.png",
+        "images/round1/fin.png" 
       ],
-      "choices": [
-        {
-          "name": "PixelPenguin",
-          "correct": false
-        },
-        {
-          "name": "ChatKoenig",
-          "correct": true
-        },
-        {
-          "name": "NudelSuppe",
-          "correct": false
-        },
-        {
-          "name": "LurkMaster99",
-          "correct": false
-        },
-        {
-          "name": "Salatgurke",
-          "correct": false
-        }
-      ]
+      "correct": "yullihahn",
+      "choiceCount": 8
     },
     {
-      "roundName": "Runde 2 (Beispiel mit 6 statt 5 Auswahlmoeglichkeiten)",
+      "roundName": "Runde 2",
       "images": [
-        "images/round2/1.png",
-        "images/round2/2.png",
-        "images/round2/3.png",
-        "images/round2/4.png",
-        "images/round2/5.png",
-        "images/round2/6.png"
+        "images/round2/i1.png",
+        "images/round2/i2.png",
+        "images/round2/i3.png",
+        "images/round2/i4.png",
+        "images/round2/i5.png",
+        "images/round2/i6.png",
+        "images/round2/fin.png"
       ],
-      "choices": [
-        {
-          "name": "Waldschrat",
-          "correct": false,
-          "extra": { "Folgt seit": "03.02.2020", "Abonnent": "Nein" }
-        },
-        {
-          "name": "MonkaSpeed",
-          "correct": false,
-          "extra": { "Folgt seit": "19.06.2023", "Abonnent": "Ja (Tier 1)" }
-        },
-        {
-          "name": "Kartoffelpüree",
-          "correct": false,
-          "extra": { "Folgt seit": "27.08.2021", "Abonnent": "Nein" }
-        },
-        {
-          "name": "ClipGoblin",
-          "correct": true,
-          "extra": { "Folgt seit": "15.04.2018", "Abonnent": "Ja (Tier 3)", "Sub seit": "2 Jahre" }
-        },
-        {
-          "name": "Teebeutel",
-          "correct": false,
-          "extra": { "Folgt seit": "09.12.2022", "Abonnent": "Nein" }
-        },
-        {
-          "name": "RegenbogenEule",
-          "correct": false,
-          "extra": { "Folgt seit": "30.05.2024", "Abonnent": "Nein" }
-        }
-      ]
+      "correct": "reptoxicyt",
+      "choiceCount": 8
+    },
+    {
+      "roundName": "Runde 3",
+      "images": [
+        "images/round3/i1.png",
+        "images/round3/i2.png",
+        "images/round3/i3.png",
+        "images/round3/i4.png",
+        "images/round3/i5.png",
+        "images/round3/i6.png",
+        "images/round3/fin.png"
+      ],
+      "correct": "jonnyjonaphanjonson",
+      "choiceCount": 8
+    },
+    {
+      "roundName": "Runde 4",
+      "images": [
+        "images/round4/i1.png",
+        "images/round4/i2.png",
+        "images/round4/i3.png",
+        "images/round4/i4.png",
+        "images/round4/i5.png",
+        "images/round4/i6.png",
+        "images/round4/fin.png"
+      ],
+      "correct": "Wubaaaa",
+      "choiceCount": 8
+    },
+    {
+      "roundName": "Runde 5",
+      "images": [
+        "images/round5/i1.png",
+        "images/round5/i2.png",
+        "images/round5/i3.png",
+        "images/round5/i4.png",
+        "images/round5/i5.png",
+        "images/round5/i6.png",
+        "images/round5/fin.png"
+      ],
+      "correct": "Kampftolette",
+      "choiceCount": 8
+    },
+    {
+      "roundName": "Runde 6",
+      "images": [
+        "images/round6/i1.png",
+        "images/round6/i2.png",
+        "images/round6/i3.png",
+        "images/round6/i4.png",
+        "images/round6/i5.png",
+        "images/round6/i6.png",
+        "images/round6/fin.png"
+      ],
+      "correct": "leeeonn_live",
+      "choiceCount": 8
+    },
+    {
+      "roundName": "Runde 7",
+      "images": [
+        "images/round7/i1.png",
+        "images/round7/i2.png",
+        "images/round7/i3.png",
+        "images/round7/i4.png",
+        "images/round7/i5.png",
+        "images/round7/i6.png",
+        "images/round7/fin.png"
+      ],
+      "correct": "Lauenberger",
+      "choiceCount": 8
+    },
+    {
+      "roundName": "Runde 8",
+      "images": [
+        "images/round8/i1.png",
+        "images/round8/i2.png",
+        "images/round8/i3.png",
+        "images/round8/i4.png",
+        "images/round8/i5.png",
+        "images/round8/i6.png",
+        "images/round8/fin.png"
+      ],
+      "correct": "mighty_935",
+      "choiceCount": 8
+    },
+    {
+      "roundName": "Runde 9",
+      "images": [
+        "images/round9/i1.png",
+        "images/round9/i2.png",
+        "images/round9/i3.png",
+        "images/round9/i4.png",
+        "images/round9/i5.png",
+        "images/round9/i6.png",
+        "images/round9/fin.png"
+      ],
+      "correct": "twopacalive",
+      "choiceCount": 8
+    },
+    {
+      "roundName": "Runde 10",
+      "images": [
+        "images/round10/i1.png",
+        "images/round10/i2.png",
+        "images/round10/i3.png",
+        "images/round10/i4.png",
+        "images/round10/i5.png",
+        "images/round10/i6.png",
+        "images/round10/fin.png"
+      ],
+      "correct": "DasHeiligeKlo",
+      "choiceCount": 8
     }
   ]
 }
