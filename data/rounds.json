@@ -4,150 +4,147 @@
     "hinweis": "Jede Runde zeigt nach und nach mehr Chat-Nachrichten eines Chatters - je früher der Chatter richtig erraten wird, desto mehr Punkte kriegst du."
   },
   "chatterPool": [
-    "DasHeiligeKlo", "Harotte", "Kampftolette", "Lauenberger", "leeeonn_live", "Leli1315", "mighty_935", "mighty_mike84",
-    "real_nykrim", "Rexsoos_", "yullihahn", "reptoxicyt", "jonnyjonaphanjonson", "twopacalive", "WehMicha", "Wubaaaa",   
-    "Pixelhorn", "zLucaaaaa", "Mr_Tesz", "xmarct6", "Blackstone2434_", "itzadirector", "raaafaeel_floose", "Mrlucky12344",
-    "CreinLP11", "Janskii_", "AronOhneC", "jojand24"
+    "Harotte", "Lelp1315", "mighty_mike84", "real_nykrim", "Rexsoos_", "WehMicha", "Pixelhorn", "zLucaaaaa", "Mr_Tesz", "xmarct6", "Blackstone2434_", "itzadirector", "raaafaeel_floose", "Mrlucky12344", "CreinLP11", "Janskii_", "AronOhneC", "jojand24", "vertrauxumtesOG", "SW0LFMC"
   ],
   "rounds": [
     {
       "roundName": "Runde 1",
       "images": [ 
-        "images/round1/i1.png", 
-        "images/round1/i2.png", 
-        "images/round1/i3.png",
-        "images/round1/i4.png", 
-        "images/round1/i5.png", 
-        "images/round1/i6.png",
+        "images/round1/p1.png", 
+        "images/round1/p2.png", 
+        "images/round1/p3.png",
+        "images/round1/p4.png", 
+        "images/round1/p5.png", 
+        "images/round1/p6.png",
         "images/round1/fin.png" 
       ],
-      "correct": "yullihahn",
+      "correct": "Blackstone2434_",
       "choiceCount": 8
     },
     {
       "roundName": "Runde 2",
       "images": [
-        "images/round2/i1.png",
-        "images/round2/i2.png",
-        "images/round2/i3.png",
-        "images/round2/i4.png",
-        "images/round2/i5.png",
-        "images/round2/i6.png",
+        "images/round2/p1.png",
+        "images/round2/p2.png",
+        "images/round2/p3.png",
+        "images/round2/p4.png",
+        "images/round2/p5.png",
+        "images/round2/p6.png",
         "images/round2/fin.png"
       ],
-      "correct": "reptoxicyt",
+      "correct": "Harotte",
       "choiceCount": 8
     },
     {
       "roundName": "Runde 3",
       "images": [
-        "images/round3/i1.png",
-        "images/round3/i2.png",
-        "images/round3/i3.png",
-        "images/round3/i4.png",
-        "images/round3/i5.png",
-        "images/round3/i6.png",
+        "images/round3/p1.png",
+        "images/round3/p2.png",
+        "images/round3/p3.png",
+        "images/round3/p4.png",
+        "images/round3/p5.png",
+        "images/round3/p6.png",
         "images/round3/fin.png"
       ],
-      "correct": "jonnyjonaphanjonson",
+      "correct": "Mrlucky12344",
       "choiceCount": 8
     },
     {
       "roundName": "Runde 4",
       "images": [
-        "images/round4/i1.png",
-        "images/round4/i2.png",
-        "images/round4/i3.png",
-        "images/round4/i4.png",
-        "images/round4/i5.png",
-        "images/round4/i6.png",
+        "images/round4/p1.png",
+        "images/round4/p2.png",
+        "images/round4/p3.png",
+        "images/round4/p4.png",
+        "images/round4/p5.png",
+        "images/round4/p6.png",
         "images/round4/fin.png"
       ],
-      "correct": "Wubaaaa",
+      "correct": "real_nykrim",
       "choiceCount": 8
     },
     {
       "roundName": "Runde 5",
       "images": [
-        "images/round5/i1.png",
-        "images/round5/i2.png",
-        "images/round5/i3.png",
-        "images/round5/i4.png",
-        "images/round5/i5.png",
-        "images/round5/i6.png",
+        "images/round5/p1.png",
+        "images/round5/p2.png",
+        "images/round5/p3.png",
+        "images/round5/p4.png",
+        "images/round5/p5.png",
+        "images/round5/p6.png",
         "images/round5/fin.png"
       ],
-      "correct": "Kampftolette",
+      "correct": "zLucaaaaa",
       "choiceCount": 8
     },
     {
       "roundName": "Runde 6",
       "images": [
-        "images/round6/i1.png",
-        "images/round6/i2.png",
-        "images/round6/i3.png",
-        "images/round6/i4.png",
-        "images/round6/i5.png",
-        "images/round6/i6.png",
+        "images/round6/p1.png",
+        "images/round6/p2.png",
+        "images/round6/p3.png",
+        "images/round6/p4.png",
+        "images/round6/p5.png",
+        "images/round6/p6.png",
         "images/round6/fin.png"
       ],
-      "correct": "leeeonn_live",
+      "correct": "Rexsoos_",
       "choiceCount": 8
     },
     {
       "roundName": "Runde 7",
       "images": [
-        "images/round7/i1.png",
-        "images/round7/i2.png",
-        "images/round7/i3.png",
-        "images/round7/i4.png",
-        "images/round7/i5.png",
-        "images/round7/i6.png",
+        "images/round7/p1.png",
+        "images/round7/p2.png",
+        "images/round7/p3.png",
+        "images/round7/p4.png",
+        "images/round7/p5.png",
+        "images/round7/p6.png",
         "images/round7/fin.png"
       ],
-      "correct": "Lauenberger",
+      "correct": "WehMicha",
       "choiceCount": 8
     },
     {
       "roundName": "Runde 8",
       "images": [
-        "images/round8/i1.png",
-        "images/round8/i2.png",
-        "images/round8/i3.png",
-        "images/round8/i4.png",
-        "images/round8/i5.png",
-        "images/round8/i6.png",
+        "images/round8/p1.png",
+        "images/round8/p2.png",
+        "images/round8/p3.png",
+        "images/round8/p4.png",
+        "images/round8/p5.png",
+        "images/round8/p6.png",
         "images/round8/fin.png"
       ],
-      "correct": "mighty_935",
+      "correct": "NurGuyYT",
       "choiceCount": 8
     },
     {
       "roundName": "Runde 9",
       "images": [
-        "images/round9/i1.png",
-        "images/round9/i2.png",
-        "images/round9/i3.png",
-        "images/round9/i4.png",
-        "images/round9/i5.png",
-        "images/round9/i6.png",
+        "images/round9/p1.png",
+        "images/round9/p2.png",
+        "images/round9/p3.png",
+        "images/round9/p4.png",
+        "images/round9/p5.png",
+        "images/round9/p6.png",
         "images/round9/fin.png"
       ],
-      "correct": "twopacalive",
+      "correct": "HyperDuck707",
       "choiceCount": 8
     },
     {
       "roundName": "Runde 10",
       "images": [
-        "images/round10/i1.png",
-        "images/round10/i2.png",
-        "images/round10/i3.png",
-        "images/round10/i4.png",
-        "images/round10/i5.png",
-        "images/round10/i6.png",
+        "images/round10/p1.png",
+        "images/round10/p2.png",
+        "images/round10/p3.png",
+        "images/round10/p4.png",
+        "images/round10/p5.png",
+        "images/round10/p6.png",
         "images/round10/fin.png"
       ],
-      "correct": "DasHeiligeKlo",
+      "correct": "Leli1315",
       "choiceCount": 8
     }
   ]
